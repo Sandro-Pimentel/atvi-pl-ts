@@ -1,7 +1,5 @@
 import Entrada from "../io/entrada";
 import Empresa from "../modelo/empresa";
-import ApagadorProduto from "../negocio/remocaoProduto";
-import ApagadorServico from "../negocio/remocaoServico";
 import AtualizacaoProduto from "../negocio/atualizacaoProduto";
 import AtualizacaoServico from "../negocio/atualizacaoServico";
 import CadastroCliente from "../negocio/cadastroCliente";
@@ -17,7 +15,7 @@ import RemocaoCliente from "../negocio/remocaoCliente";
 import CadastroPet from "../negocio/cadastroPet";
 import ListagemPet from "../negocio/listagemPets";
 import AtualizacaoPet from "../negocio/atualizacaoPet";
-import RemocaoPet from "../negocio/ramocaoPet";
+import RemocaoPet from "../negocio/remocaoPet";
 
 console.log(`Bem-vindo ao melhor sistema de gerenciamento de pet shops e clínicas veterinarias`)
 let empresa = new Empresa()

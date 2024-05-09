@@ -25,13 +25,16 @@ export default class RemocaoPet implements Remocao {
                     if(pet.getNome == nome) {
                         e.remPet(index)
                         this.pets.splice(index, 1)
+                        //removido = this.pets.splice(index, 1)
                     }
                 });
             }
         })
         
-        if((typeof(removido)).length < 10){
-            console.log("\nPet deletado com sucesso!\n")
-        } 
+        if((typeof(removido)) == undefined){
+            console.log("\nPet não encontrado\n")
+        }
+
+        console.log("\nPet deletado com sucesso!\n")
     }
 }
