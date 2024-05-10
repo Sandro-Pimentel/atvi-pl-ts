@@ -121,6 +121,7 @@ while (execucao) {
                             break;
                     }
                 break;
+                
                 case 4:
                     switch (opcao2) {
                         case 2:
@@ -142,8 +143,9 @@ while (execucao) {
                             cadastroPet.cadastrar()
                             break;
                     }
-                break;
+                    break;
                 }
+                break;
         
         case 2:
             console.log(`1 - Adicionar produto ao carrinho`)
