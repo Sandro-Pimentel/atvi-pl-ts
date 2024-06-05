@@ -31,16 +31,16 @@ export default class AtualizacaoCliente implements Atualizacao {
         let dia = parseInt(dtEmissao[2])
         let mes = parseInt(dtEmissao[1])
         let ano = parseInt(dtEmissao[0])
-        let atualizado;
+        let atualizado: Cliente[] = [];
         this.clientes.forEach((e, i) => {
             if(e.getCpf.getValor == cpf) {
-                let cliente = new Cliente(nome, nomeSocial, new CPF(cpf, e.getCpf.getDataEmissao))
+                let cliente = new Cliente(nome, nomeSocial, new CPF(cpf, e.getCpf.getEmissao))
                 if(verificaRg == 0) {
                     cliente.addRg(new RG(vRg, new Date(dia, mes, ano)))
                 } else {
                     console.log(`Qual RG deseja alterar?: `)
                     e.getRgs.forEach((rg, i) => {
-                        console.log(`${i} - RG: ${rg.getValor} - Data Emissão: ${rg.getDataEmissao}`)
+                        console.log(`${i} - RG: ${rg.getValor} - Data Emissão: ${rg.getEmissao}`)
                     });
                     cliente.altRg(i-1, new RG(vRg, new Date(dia, mes, ano)))
                 }
@@ -50,14 +50,14 @@ export default class AtualizacaoCliente implements Atualizacao {
                 } else {
                     console.log(`Qual telefone deseja alterar?: `)
                     e.getTelefones.forEach((t, i) => {
-                        console.log(`${i} - DDD: ${t.getDdd} - Número: ${t.getNumero}`)
+                        console.log(`${i} - DDD: ${t.getDDD} - Número: ${t.getNumero}`)
                     });
                     cliente.altTelefone(i-1, new Telefone(ddd, ntel))
                 }
                 atualizado = this.clientes.splice(i, 1, cliente)
             }
         })
-        if((typeof(atualizado)).length < 10){
+        if(atualizado.length > 0){
             console.log("Produto atualizado com sucesso!")
             console.log('\n')
         }

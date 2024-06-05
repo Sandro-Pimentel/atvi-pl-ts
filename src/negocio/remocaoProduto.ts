@@ -15,13 +15,13 @@ export default class RemocaoProduto extends Remocao {
     apagar(): void {
         console.log("\nInício da remoção de produto")
         let cod =  this.entrada.receberTexto(`Por favor informe o codigo do produto: `)
-        let removido;
-        this.produtos.forEach((e, i) => {
-            if(e.codigo == cod) {
-                removido = this.produtos.splice(i, 1)
+        let removido: Produto[] = [];
+        this.produtos.forEach((produto, index) => {
+            if(produto.codigo == cod) {
+                removido = this.produtos.splice(index, 1)
             } 
         })
-        if((typeof(removido)).length < 10){
+        if(removido.length > 0){
             console.log("Produto deletado com sucesso!")
             console.log('\n')
         } 

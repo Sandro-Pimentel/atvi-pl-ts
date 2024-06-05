@@ -1,84 +1,120 @@
 import Entrada from "../io/entrada";
 import Empresa from "../modelo/empresa";
+import AdicaoProduto from "../negocio/adicaoProduto";
+import AdicaoServico from "../negocio/adicaoServico";
+import AtualizacaoCliente from "../negocio/atualizacaoCliente";
+import AtualizacaoPet from "../negocio/atualizacaoPet";
 import AtualizacaoProduto from "../negocio/atualizacaoProduto";
 import AtualizacaoServico from "../negocio/atualizacaoServico";
 import CadastroCliente from "../negocio/cadastroCliente";
+import CadastroPet from "../negocio/cadastroPet";
 import CadastroProduto from "../negocio/cadastroProduto";
 import CadastroServico from "../negocio/cadastroServico";
 import ListagemClientes from "../negocio/listagemClientes";
+import ListagemClientesConsumo from "../negocio/listagemClientesConsumo";
+import ListagemPet from "../negocio/listagemPets";
 import ListagemProdutos from "../negocio/listagemProdutos";
 import ListagemServicos from "../negocio/listagemServicos";
+import RemocaoCliente from "../negocio/remocaoCliente";
+import RemocaoPet from "../negocio/remocaoPet";
 import RemocaoProduto from "../negocio/remocaoProduto";
 import RemocaoServico from "../negocio/remocaoServico";
-import AtualizacaoCliente from "../negocio/atualizacaoCliente";
-import RemocaoCliente from "../negocio/remocaoCliente";
-import CadastroPet from "../negocio/cadastroPet";
-import ListagemPet from "../negocio/listagemPets";
-import AtualizacaoPet from "../negocio/atualizacaoPet";
-import RemocaoPet from "../negocio/remocaoPet";
 
-console.log(`Bem-vindo ao melhor sistema de gerenciamento de pet shops e clínicas veterinarias`)
-let empresa = new Empresa()
-let execucao = true
-let entrada = new Entrada()
+
+console.log(`Bem-vindo ao melhor sistema de gerenciamento de pet shops e clínicas veterinarias`);
+let empresa = new Empresa();
+let execucao = true;
+let entrada = new Entrada();
+const opcoesAdm = `
+Opções:
+0 - Voltar
+1 - Clientes
+2 - Produtos
+3 - Serviços
+4 - Pets
+5 - Listagens gerais
+`
+
+const opcoesCrud = `
+Opções:
+0 - Voltar
+1 - Cadastrar
+2 - Listar
+3 - Atualizar
+4 - Remover
+`
+
+const opcoesListagens = `
+Opções:
+0 - Voltar
+1 - Clientes que mais consumiram(quantidade)
+2 - Clientes que mais consumiram(valor)
+3 - Produtos mais consumidos
+4 - Serviços mais consumidos
+5 - Produtos mais consumidos(tipo de pet)
+6 - Serviços mais consumidos(tipo de pet)
+7 - Produtos mais consumidos(raça de pet)
+8 - Serviços mais consumidos(raça de pet)
+
+`
 
 while (execucao) {
-    console.log(`0 - Sair`)
-    console.log(`1 - Administrador`)
-    console.log(`2 - Usuário`)
-    let opcao = entrada.receberNumero(`Escolha como deseja entrar: `)
-
-    switch (opcao) {
+    console.log(`0 - Sair`);
+    console.log(`1 - Administrador`);
+    console.log(`2 - Usuário`);
+    let opcao = entrada.receberNumero(`Escolha como deseja entrar: `);
+    switch(opcao) {
         case 1:
-            let opcao1 = 0
+            let opcao1 = 0;
             if(opcao > 0) {
-                console.log(`Opções:`);
-                console.log(`0 - Voltar`);
-                console.log(`1 - Clientes`);
-                console.log(`2 - Produtos`);
-                console.log(`3 - Serviços`);
-                console.log(`4 - Pets`)
+                console.log(opcoesAdm);
 
-                opcao1 = entrada.receberNumero(`Por favor, escolha uma opção: `)
+                opcao1 = entrada.receberNumero(`Por favor, escolha uma opção: `);
             }
 
-            let opcao2 = 0
+            let opcao2 = 0;
+            let opcaoListagem = 0;
+            if(opcao1 > 0 && opcao1 < 5) {
+                console.log(opcoesCrud);
             
-            if(opcao1 > 0) {
-                console.log(`0 - Voltar`)
-                console.log(`1 - Cadastrar`)
-                console.log(`2 - Listar`)
-                console.log(`3 - Atualizar`)
-                console.log(`4 - Remover`)
+                opcao2 = entrada.receberNumero(`Por favor, escolha outra opção: `);
 
-                opcao2 = entrada.receberNumero(`Por favor, escolha outra opção: `)
+            } else {
+                console.log(opcoesListagens);
+
+                opcaoListagem = entrada.receberNumero(`Por favor, escolha uma opção: `)
             }
 
-            switch (opcao1) {
+            switch(opcao1) {
                 case 1:
-                    switch (opcao2) {
+                    switch(opcao2) {
                         case 2:
                             let listagemC = new ListagemClientes(empresa.getClientes)
                             listagemC.listar()
                             break;
+
                         case 3:
                             let atualizacaoC = new AtualizacaoCliente(empresa.getClientes)
                             atualizacaoC.atualizar()
                             break;
+
                         case 4:
                             let remocaoC = new RemocaoCliente(empresa.getClientes)
                             remocaoC.apagar()
                             break;
+
                         case 0:
                             break;
+
                         default:
                             let cadastroC = new CadastroCliente(empresa.getClientes)
                             cadastroC.cadastrar()
                             break;
                     }
                 break;
+
                 case 2:
-                    switch (opcao2) {
+                    switch(opcao2) {
                         case 2:
                             let listagemP = new ListagemProdutos(empresa.getProdutos)
                             listagemP.listar()
@@ -91,16 +127,19 @@ while (execucao) {
                             let remocaoP = new RemocaoProduto(empresa.getProdutos)
                             remocaoP.apagar()
                             break;
+
                         case 0:
                             break;
+
                         default:
                             let cadastroP = new CadastroProduto(empresa.getProdutos)
                             cadastroP.cadastrar()
                             break;
                     }
                 break;
+
                 case 3:
-                    switch (opcao2) {
+                    switch(opcao2) {
                         case 2:
                             let listagemS = new ListagemServicos(empresa.getServicos)
                             listagemS.listar()
@@ -120,10 +159,10 @@ while (execucao) {
                             cadastroS.cadastrar()
                             break;
                     }
-                break;
-                
+                    break;
+
                 case 4:
-                    switch (opcao2) {
+                    switch(opcao2) {
                         case 2:
                             let listagemPet = new ListagemPet(empresa.getPets)
                             listagemPet.listar()
@@ -143,31 +182,71 @@ while (execucao) {
                             cadastroPet.cadastrar()
                             break;
                     }
-                    break;
-                }
                 break;
-        
+
+                case 5:
+                    switch(opcaoListagem) {
+                        case 2: 
+                            break;
+                        case 0:
+                            break;
+                        default:
+                            let listagemClientesConsumo = new ListagemClientesConsumo(empresa.getClientes);
+                            listagemClientesConsumo.listar();
+                            break;
+                    }
+            }
+            break;
+
         case 2:
-            console.log(`1 - Adicionar produto ao carrinho`)
-            console.log(`1 - Adicionar serviço ao carrinho`)
-            console.log(`2 - Listar produtos no carrinho`)
-            console.log(`2 - Listar serviços no carrinho`)
-            console.log(`3 - Alterar produto no carrinho`)
-            console.log(`3 - Alterar serviço no carrinho`)
-            console.log(`4 - Remover produto do carrinho`)
-            console.log(`4 - Remover serviço do carrinho`)
-            let opcao3 = entrada.receberNumero(`Escolha como deseja gerenciar os produtos ou serviços`)
-            switch(opcao3){
-                case 1:
-                    //n faço ideia doq fazer
+            let opcaoUser = 0
+            if(opcaoUser > 0) {
+                console.log(`0 - Voltar`)
+                console.log(`1 - Produto`)
+                console.log(`2 - Serviço`) 
+                opcaoUser = entrada.receberNumero(`Escolha a opção de compra: `)
             }
 
-            break; 
+            console.log(`0 - Voltar`);
+            console.log(`1 - Iniciar compras`);
+            console.log(`2 - Mostrar consumidos`);
+            let opcaoUser2 = entrada.receberNumero(`Escolha a opção de compra: `)
+            switch(opcaoUser) {
+                case 1:
+                    switch(opcaoUser2) {
+                        case 1:
+                            let adicaoProduto = new AdicaoProduto(empresa.getProdutos, empresa.getClientes);
+                            adicaoProduto.adicionar();
+                            break;
+                        case 2:
+                            break;
+                        case 0:
+                            break;
+                    }
+
+                case 2:
+                    switch(opcaoUser2) {
+                        case 1:
+                            let adicaoServico = new AdicaoServico(empresa.getServicos, empresa.getClientes);
+                            adicaoServico.adicionar();
+                            break;
+                        case 2:
+                            break;
+                        case 0:
+                            break;
+                    }
+                case 0:
+                    break;  
+                default:
+                    break;
+            }
+            break;
+
         case 0:
-            execucao = false
-            console.log(`Até mais`)
+            execucao = false;
+            console.log(`Até mais!`);
             break;
         default:
-            console.log(`Operação não entendida :(`)
+            console.log(`Operação não atendida :(`);
     }
 }

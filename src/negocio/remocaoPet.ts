@@ -17,24 +17,21 @@ export default class RemocaoPet implements Remocao {
     apagar(): void {
         console.log("\nInício da remoção de pet")
         let cpf =  this.entrada.receberTexto(`Por favor informe o cpf do dono do pet: `)
-        let nome = this.entrada.receberTexto(`Por favor informe o nome do pet`)
-        let removido;
-        this.clientes.forEach((e) => {
-            if(e.getCpf.getValor == cpf) {
-                e.getPets.forEach((pet, index) => {
+        let nome = this.entrada.receberTexto(`Por favor informe o nome do pet: `)
+        let removido: Pet[] = [];
+        this.clientes.forEach((cliente) => {
+            if(cliente.getCpf.getValor == cpf) {
+                cliente.getPets.forEach((pet, index) => {
                     if(pet.getNome == nome) {
-                        e.remPet(index)
-                        this.pets.splice(index, 1)
-                        //removido = this.pets.splice(index, 1)
+                        cliente.remPet(index)
+                        removido = this.pets.splice(index, 1)
                     }
                 });
             }
         })
         
-        if((typeof(removido)) == undefined){
-            console.log("\nPet não encontrado\n")
+        if(removido.length > 0){
+            console.log("\nPet deletado com sucesso!\n")
         }
-
-        console.log("\nPet deletado com sucesso!\n")
     }
 }

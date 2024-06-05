@@ -22,19 +22,19 @@ export default class AtualizacaoPet implements Atualizacao {
         let raca = this.entrada.receberTexto(`Por favor informe o novo raça do pet: `)
         let gen = this.entrada.receberTexto(`Por favor informe o novo gênero do pet: `)
 
-        let atualizado;
-        this.clientes.forEach((e, i) => {
-            if(e.getCpf.getValor == cpf) {
+        let atualizado: Pet[] = [];
+        this.clientes.forEach((cliente) => {
+            if(cliente.getCpf.getValor == cpf) {
                 this.pets.forEach((pet, index) => {
                     if(pet.getNome == nome) {
-                        e.altPet(index, new Pet(nome, raca, gen, tipo, pet.getCpfDono))
+                        cliente.altPet(index, new Pet(nome, raca, gen, tipo, pet.getCpfDono))
                         atualizado = this.pets.splice(index, 1, new Pet(nome, raca, gen, tipo, pet.getCpfDono))
                     }
                 })
                 
             }
         })
-        if((typeof(atualizado)).length < 10){
+        if(atualizado.length > 0){
             console.log("\nPet atualizado com sucesso!")
             console.log('\n')
         }

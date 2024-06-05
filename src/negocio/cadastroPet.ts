@@ -28,7 +28,6 @@ export default class CadastroPet implements Cadastro {
         do {
             donoCpf = this.entrada.receberTexto(`Por favor informe o cpf do dono: `)
             this.clientes.forEach((cliente) => {
-                //console.log(cliente.getCpf.getValor)
                 if(cliente.getCpf.getValor == donoCpf) {
                     dono = cliente
                     achou = true

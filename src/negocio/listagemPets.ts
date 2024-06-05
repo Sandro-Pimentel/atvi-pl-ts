@@ -10,12 +10,12 @@ export default class ListagemPet implements Listagem {
 
     listar(): void {
         console.log(`\nLista de todos os pets: `)
-        this.pets.forEach(e => {
-            console.log(`Nome: ${e.getNome}`)
-            console.log(`Tipo: ${e.getTipo}`)
-            console.log(`Raça: ${e.getRaca}`)
-            console.log(`Gênero: ${e.getGenero}`)
-            console.log(`Cpf do Dono: ${e.getCpfDono}`)
+        this.pets.forEach(pet => {
+            console.log(`Nome: ${pet.getNome}`)
+            console.log(`Tipo: ${pet.getTipo}`)
+            console.log(`Raça: ${pet.getRaca}`)
+            console.log(`Gênero: ${pet.getGenero}`)
+            console.log(`Cpf do Dono: ${pet.getCpfDono}`)
             console.log(`---------------------------------`)
         })
         console.log(`\n`)

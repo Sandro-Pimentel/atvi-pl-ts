@@ -14,13 +14,13 @@ export default class RemocaoServico implements Remocao{
     apagar(): void {
         console.log("\nInício da remoção de serviço")
         let cod =  this.entrada.receberTexto(`Por favor informe o codigo do serviço: `)
-        let removido;
-        this.servicos.forEach((e, i) => {
-            if(e.codigo == cod) {
-                removido = this.servicos.splice(i, 1)
+        let removido: Servico[] = [];
+        this.servicos.forEach((servico, index) => {
+            if(servico.codigo == cod) {
+                removido = this.servicos.splice(index, 1)
             } 
         })
-        if((typeof(removido)).length < 10){
+        if(removido.length > 0){
             console.log("Serviço deletado com sucesso!")
             console.log('\n')
         }

@@ -4,10 +4,10 @@ import Produto from "./produto"
 import Servico from "./servico"
 
 export default class Empresa{
-    private clientes: Array<Cliente>
-    private produtos: Array<Produto>
-    private servicos: Array<Servico>
-    private pets: Array<Pet>
+    private clientes: Cliente[]
+    private produtos: Produto[]
+    private servicos: Servico[]
+    private pets: Pet[]
 
     constructor(){
         this.clientes = []

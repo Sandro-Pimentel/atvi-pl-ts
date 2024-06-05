@@ -15,13 +15,13 @@ export default class AtualizacaoServico {
         let cod = this.entrada.receberTexto(`Por favor informe o codigo do serviço que deseja atualizar: `)
         let nome = this.entrada.receberTexto(`Por favor informe o novo nome do serviço: `)
         let preco = this.entrada.receberNumero(`Por favor informe o novo preço do serviço: `)
-        let atualizado;
-        this.servicos.forEach((e, i) => {
-            if(e.codigo == cod) {
-                atualizado = this.servicos.splice(i, 1, new Servico(cod, nome, preco))
+        let atualizado: Servico[] = [];
+        this.servicos.forEach((servico, index) => {
+            if(servico.codigo == cod) {
+                atualizado = this.servicos.splice(index, 1, new Servico(cod, nome, preco))
             }
         })
-        if((typeof(atualizado)).length < 10){
+        if(atualizado.length > 0){
             console.log("Serviço atualizado com sucesso!")
             console.log('\n')
         }

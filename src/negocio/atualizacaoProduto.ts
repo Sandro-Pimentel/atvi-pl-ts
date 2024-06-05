@@ -17,13 +17,13 @@ export default class AtualizacaoProduto extends Atualizacao {
         let cod = this.entrada.receberTexto(`Por favor informe o codigo do produto que deseja atualizar: `)
         let nome = this.entrada.receberTexto(`Por favor informe o novo nome do produto: `)
         let preco = this.entrada.receberNumero(`Por favor informe o novo nome do produto: `)
-        let atualizado;
-        this.produtos.forEach((e, i) => {
-            if(e.codigo == cod) {
-                atualizado = this.produtos.splice(i, 1, new Produto(cod, nome, preco))
+        let atualizado: Produto[] = [];
+        this.produtos.forEach((produto, index) => {
+            if(produto.codigo == cod) {
+                atualizado = this.produtos.splice(index, 1, new Produto(cod, nome, preco))
             }
         })
-        if((typeof(atualizado)).length < 10){
+        if(atualizado.length > 0){
             console.log("Produto atualizado com sucesso!")
             console.log('\n')
         }

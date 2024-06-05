@@ -7,11 +7,11 @@ export default class Telefone {
         this.numero = numero
     }
 
-    get getDdd(): string {
+    get getDDD() {
         return this.ddd
     }
 
-    get getNumero(): string {
+    get getNumero() {
         return this.numero
     }
 }

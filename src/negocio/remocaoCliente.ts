@@ -14,13 +14,13 @@ export default class RemocaoCliente implements Remocao {
     apagar(): void {
         console.log("\nInício da remoção de cliente")
         let cpf =  this.entrada.receberTexto(`Por favor informe o cpf do cliente: `)
-        let removido;
-        this.clientes.forEach((e, i) => {
-            if(e.getCpf.getValor == cpf) {
-                removido = this.clientes.splice(i, 1)
+        let removido: Cliente[] = [];
+        this.clientes.forEach((cliente, index) => {
+            if(cliente.getCpf.getValor == cpf) {
+                removido = this.clientes.splice(index, 1)
             } 
         })
-        if((typeof(removido)).length < 10){
+        if(removido.length > 0){
             console.log("Cliente deletado com sucesso!")
             console.log('\n')
         } 
