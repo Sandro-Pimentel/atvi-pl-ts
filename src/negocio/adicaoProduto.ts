@@ -1,5 +1,7 @@
 import Entrada from "../io/entrada";
 import Cliente from "../modelo/cliente";
+import CPF from "../modelo/cpf";
+import Pet from "../modelo/pet";
 import Produto from "../modelo/produto";
 import Adicao from "./adicao";
 import ListagemProdutos from "./listagemProdutos";
@@ -22,12 +24,26 @@ export default class AdicaoProduto extends Adicao {
         listagem.listar()
         let continuar = true
         let cpf: string
-        let user: Cliente
+        let user: Cliente = new Cliente('', '', new CPF('', new Date()))
         while(continuar){
             cpf = this.entrada.receberTexto(`Escolha o cpf do cliente que deseja comprar: `)
             this.clientes.forEach(cliente => {
                 if(cliente.getCpf.getValor === cpf){
                     user = cliente
+                    continuar = false
+                }
+            })
+        }
+
+        continuar = true
+        let nome: string
+        let bixin: Pet
+        while(continuar){
+            nome = this.entrada.receberTexto(`Escolha o nome do pet que obterá o produto: `)
+            user.getPets.forEach(pet => {
+                if(pet.getNome === nome){
+                    bixin = pet
+                    continuar = false
                 }
             })
         }
