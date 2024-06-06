@@ -28,6 +28,14 @@ export default class Cliente {
         this.pets = []
     }
     
+    set setProdutosConsumidos(produtosConsumidos: Produto[]) {
+        this.produtosConsumidos = produtosConsumidos
+    }
+    
+    set setServicosConsumidos(servicosConsumidos: Servico[]) {
+        this.servicosConsumidos = servicosConsumidos
+    }
+
     get getCpf(): CPF {
         return this.cpf
     }

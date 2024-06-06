@@ -21,6 +21,14 @@ export default class Pet {
         this.servicosConsumidos = []
     }
 
+    set setProdutosConsumidos(produtosConsumidos: Produto[]) {
+        this.produtosConsumidos = produtosConsumidos
+    }
+    
+    set setServicosConsumidos(servicosConsumidos: Servico[]) {
+        this.servicosConsumidos = servicosConsumidos
+    }
+
     get getNome() {
         return this.nome
     }

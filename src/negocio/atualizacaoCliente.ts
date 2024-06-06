@@ -54,6 +54,8 @@ export default class AtualizacaoCliente implements Atualizacao {
                     });
                     cliente.altTelefone(i-1, new Telefone(ddd, ntel))
                 }
+                cliente.setProdutosConsumidos = e.getProdutosConsumidos
+                cliente.setServicosConsumidos = e.getServicosConsumidos
                 atualizado = this.clientes.splice(i, 1, cliente)
             }
         })

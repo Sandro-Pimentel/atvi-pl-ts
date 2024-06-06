@@ -15,6 +15,7 @@ import ListagemClientesConsumo from "../negocio/listagemClientesConsumo";
 import ListagemClientesVal from "../negocio/listagemClientesVal";
 import ListagemPet from "../negocio/listagemPets";
 import ListagemProdutoConsumido from "../negocio/listagemProdutoConsumido";
+import ListagemProdutoTipo from "../negocio/listagemProdutoTipo";
 import ListagemProdutos from "../negocio/listagemProdutos";
 import ListagemServicoConsumido from "../negocio/listagemServicoConsumido";
 import ListagemServicos from "../negocio/listagemServicos";
@@ -202,6 +203,8 @@ while (execucao) {
                             listagemServicoConsumido.listar()
                             break;
                         case 5:
+                            let listagemProdutoTipo = new ListagemProdutoTipo(empresa.getPets)
+                            listagemProdutoTipo.listar()
                             break;
                         case 6:
                             break;
@@ -222,46 +225,24 @@ while (execucao) {
         case 2:
             let opcaoUser = 0
             if(opcaoUser > 0) {
-                console.log(`0 - Voltar`)
-                console.log(`1 - Produto`)
-                console.log(`2 - Serviço`) 
+                console.log(`0 - Voltar`);
+                console.log(`1 - Comprar Produto`);
+                console.log(`2 - Comprar Serviço`);
                 opcaoUser = entrada.receberNumero(`Escolha a opção de compra: `)
             }
 
-            console.log(`0 - Voltar`);
-            console.log(`1 - Iniciar compras`);
-            console.log(`2 - Mostrar consumidos`);
-            let opcaoUser2 = entrada.receberNumero(`Escolha a opção de compra: `)
             switch(opcaoUser) {
                 case 1:
-                    switch(opcaoUser2) {
-                        case 1:
-                            let adicaoProduto = new AdicaoProduto(empresa.getProdutos, empresa.getClientes);
-                            adicaoProduto.adicionar();
-                            break;
-                        case 2:
-                            break;
-                        case 0:
-                            break;
-                    }
-
-                case 2:
-                    switch(opcaoUser2) {
-                        case 1:
-                            let adicaoServico = new AdicaoServico(empresa.getServicos, empresa.getClientes);
-                            adicaoServico.adicionar();
-                            break;
-                        case 2:
-                            break;
-                        case 0:
-                            break;
-                    }
-                case 0:
-                    break;  
-                default:
+                    let adicaoProduto = new AdicaoProduto(empresa.getProdutos, empresa.getClientes);
+                    adicaoProduto.adicionar();
                     break;
-            }
-            break;
+                case 2:
+                    let adicaoServico = new AdicaoServico(empresa.getServicos, empresa.getClientes);
+                    adicaoServico.adicionar();
+                    break;
+                case 0:
+                    break;
+                }
 
         case 0:
             execucao = false;

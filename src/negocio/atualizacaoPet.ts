@@ -27,8 +27,11 @@ export default class AtualizacaoPet implements Atualizacao {
             if(cliente.getCpf.getValor == cpf) {
                 this.pets.forEach((pet, index) => {
                     if(pet.getNome == nome) {
-                        cliente.altPet(index, new Pet(nome, raca, gen, tipo, pet.getCpfDono))
-                        atualizado = this.pets.splice(index, 1, new Pet(nome, raca, gen, tipo, pet.getCpfDono))
+                        let bixin = new Pet(nome, raca, gen, tipo, pet.getCpfDono)
+                        bixin.setProdutosConsumidos = pet.getProdutosConsumidos
+                        bixin.setServicosConsumidos = pet.getServicosConsumidos
+                        cliente.altPet(index, bixin)
+                        atualizado = this.pets.splice(index, 1, bixin)
                     }
                 })
                 
