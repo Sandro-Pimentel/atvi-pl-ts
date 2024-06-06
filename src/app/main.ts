@@ -12,9 +12,11 @@ import CadastroProduto from "../negocio/cadastroProduto";
 import CadastroServico from "../negocio/cadastroServico";
 import ListagemClientes from "../negocio/listagemClientes";
 import ListagemClientesConsumo from "../negocio/listagemClientesConsumo";
+import ListagemClientesVal from "../negocio/listagemClientesVal";
 import ListagemPet from "../negocio/listagemPets";
 import ListagemProdutoConsumido from "../negocio/listagemProdutoConsumido";
 import ListagemProdutos from "../negocio/listagemProdutos";
+import ListagemServicoConsumido from "../negocio/listagemServicoConsumido";
 import ListagemServicos from "../negocio/listagemServicos";
 import RemocaoCliente from "../negocio/remocaoCliente";
 import RemocaoPet from "../negocio/remocaoPet";
@@ -187,13 +189,17 @@ while (execucao) {
 
                 case 5:
                     switch(opcaoListagem) {
-                        case 2: 
+                        case 2:
+                            let listagemClientesVal = new ListagemClientesVal(empresa.getClientes)
+                            listagemClientesVal.listar()
                             break;
                         case 3:
                             let listagemProdutoConsumido = new ListagemProdutoConsumido(empresa.getClientes, empresa.getProdutos)
                             listagemProdutoConsumido.listar()
                             break;
                         case 4:
+                            let listagemServicoConsumido = new ListagemServicoConsumido(empresa.getClientes, empresa.getServicos)
+                            listagemServicoConsumido.listar()
                             break;
                         case 5:
                             break;

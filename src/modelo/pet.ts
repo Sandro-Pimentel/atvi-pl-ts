@@ -1,4 +1,6 @@
 import CPF from "./cpf"
+import Produto from "./produto"
+import Servico from "./servico"
 
 export default class Pet {
     private nome: string
@@ -6,6 +8,8 @@ export default class Pet {
     private raca: string
     private genero: string
     private cpfDono: CPF
+    private produtosConsumidos: Produto[]
+    private servicosConsumidos: Servico[]
 
     constructor(nome: string, raca: string, genero: string, tipo: string, cpfDono: CPF) {
         this.nome = nome
@@ -13,6 +17,8 @@ export default class Pet {
         this.genero = genero
         this.tipo = tipo
         this.cpfDono = cpfDono
+        this.produtosConsumidos = []
+        this.servicosConsumidos = []
     }
 
     get getNome() {
@@ -34,4 +40,13 @@ export default class Pet {
     get getCpfDono() {
         return this.cpfDono
     }
+
+    get getProdutosConsumidos() {
+        return this.produtosConsumidos
+    }
+
+    get getServicosConsumidos() {
+        return this.servicosConsumidos
+    }
+
 }
