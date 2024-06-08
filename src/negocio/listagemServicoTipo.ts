@@ -3,7 +3,7 @@ import Pet from "../modelo/pet";
 import Produto from "../modelo/produto";
 import Listagem from "./listagem";
 
-export default class ListagemProdutoTipo extends Listagem {
+export default class ListagemServicoTipo extends Listagem {
     private pets: Pet[]
     private entrada: Entrada
 
@@ -25,17 +25,17 @@ export default class ListagemProdutoTipo extends Listagem {
 
     listar() : void {
         let tipo = this.entrada.receberTexto(`Digite o tipo de pet que deseja filtrar: `)
-        console.log(`\nProdutos mais consumidos por pets do tipo ${tipo}:`)
+        console.log(`\nServiços mais consumidos por pets do tipo ${tipo}:`)
         const lista = this.filtraTipo(this.pets, tipo)
         let listaRetorno: {tipo: string, data: {produto: Produto, qtd: number}[]} = {tipo: tipo, data: []}
-        const produtos: string[] = []
+        const servicos: string[] = []
         lista.forEach(pet => {
-            pet.getProdutosConsumidos.forEach(produto => {
-                if(!produtos.includes(produto.codigo)){
-                    produtos.push(produto.codigo)
-                    listaRetorno.data.push({produto: produto, qtd: 1})
+            pet.getServicosConsumidos.forEach(servico => {
+                if(!servicos.includes(servico.codigo)){
+                    servicos.push(servico.codigo)
+                    listaRetorno.data.push({produto: servico, qtd: 1})
                 } else {
-                    let indice = produtos.indexOf(produto.codigo)
+                    let indice = servicos.indexOf(servico.codigo)
                     listaRetorno.data[indice].qtd+=1
                 }
             })

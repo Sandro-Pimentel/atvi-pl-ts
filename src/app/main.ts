@@ -1,5 +1,10 @@
 import Entrada from "../io/entrada";
+import Cliente from "../modelo/cliente";
+import CPF from "../modelo/cpf";
 import Empresa from "../modelo/empresa";
+import Pet from "../modelo/pet";
+import Produto from "../modelo/produto";
+import Servico from "../modelo/servico";
 import AdicaoProduto from "../negocio/adicaoProduto";
 import AdicaoServico from "../negocio/adicaoServico";
 import AtualizacaoCliente from "../negocio/atualizacaoCliente";
@@ -15,9 +20,12 @@ import ListagemClientesConsumo from "../negocio/listagemClientesConsumo";
 import ListagemClientesVal from "../negocio/listagemClientesVal";
 import ListagemPet from "../negocio/listagemPets";
 import ListagemProdutoConsumido from "../negocio/listagemProdutoConsumido";
+import ListagemProdutoRaca from "../negocio/listagemProdutoRaca";
 import ListagemProdutoTipo from "../negocio/listagemProdutoTipo";
 import ListagemProdutos from "../negocio/listagemProdutos";
 import ListagemServicoConsumido from "../negocio/listagemServicoConsumido";
+import ListagemServicoRaca from "../negocio/listagemServicoRaca";
+import ListagemServicoTipo from "../negocio/listagemServicoTipo";
 import ListagemServicos from "../negocio/listagemServicos";
 import RemocaoCliente from "../negocio/remocaoCliente";
 import RemocaoPet from "../negocio/remocaoPet";
@@ -27,6 +35,13 @@ import RemocaoServico from "../negocio/remocaoServico";
 
 console.log(`Bem-vindo ao melhor sistema de gerenciamento de pet shops e clínicas veterinarias`);
 let empresa = new Empresa();
+let cliente = new Cliente('Sandro', 'Sandro', new CPF('1', new Date()))
+empresa.setClientes = [cliente, new Cliente('João', 'João', new CPF('2', new Date()))]
+empresa.setServicos = [new Servico('1', 'Banho', 120), new Servico('2', 'Tosa', 100)]
+empresa.setProdutos = [new Produto('1', 'Ração 50kg', 150), new Produto('2', 'Ração 20kg', 80)]
+empresa.setPets = [new Pet('Rex', 'Pincher', 'Feminino', 'Cachorro', cliente.getCpf), new Pet('Nick', 'Pincher', 'Masculino', 'Cachorro', cliente.getCpf)]
+cliente.addPet(new Pet('Rex', 'Pincher', 'Feminino', 'Cachorro', cliente.getCpf))
+cliente.addPet(new Pet('Nick', 'Pincher', 'Masculino', 'Cachorro', cliente.getCpf))
 let execucao = true;
 let entrada = new Entrada();
 const opcoesAdm = `
@@ -207,10 +222,16 @@ while (execucao) {
                             listagemProdutoTipo.listar()
                             break;
                         case 6:
+                            let listagemServicoTipo = new ListagemServicoTipo(empresa.getPets)
+                            listagemServicoTipo.listar()
                             break;
                         case 7:
+                            let listagemProdutoRaca = new ListagemProdutoRaca(empresa.getPets)
+                            listagemProdutoRaca.listar()
                             break;
                         case 8:
+                            let listagemServicoRaca = new ListagemServicoRaca(empresa.getPets)
+                            listagemServicoRaca.listar()
                             break;
                         case 0:
                             break;
@@ -224,25 +245,25 @@ while (execucao) {
 
         case 2:
             let opcaoUser = 0
-            if(opcaoUser > 0) {
-                console.log(`0 - Voltar`);
-                console.log(`1 - Comprar Produto`);
-                console.log(`2 - Comprar Serviço`);
-                opcaoUser = entrada.receberNumero(`Escolha a opção de compra: `)
-            }
+            
+            console.log(`0 - Voltar`);
+            console.log(`1 - Comprar Produto`);
+            console.log(`2 - Comprar Serviço`);
+            opcaoUser = entrada.receberNumero(`Escolha a opção de compra: `)
 
             switch(opcaoUser) {
                 case 1:
-                    let adicaoProduto = new AdicaoProduto(empresa.getProdutos, empresa.getClientes);
+                    let adicaoProduto = new AdicaoProduto(empresa.getProdutos, empresa.getClientes, empresa.getPets);
                     adicaoProduto.adicionar();
                     break;
                 case 2:
-                    let adicaoServico = new AdicaoServico(empresa.getServicos, empresa.getClientes);
+                    let adicaoServico = new AdicaoServico(empresa.getServicos, empresa.getClientes, empresa.getPets);
                     adicaoServico.adicionar();
                     break;
                 case 0:
                     break;
                 }
+            break;
 
         case 0:
             execucao = false;

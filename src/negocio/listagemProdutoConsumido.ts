@@ -44,7 +44,7 @@ export default class ListagemProdutoConsumido extends Listagem {
         this.tops.sort(this.ordena)
         console.log(`\nTop 10 produtos que mais consumiram:`);
         this.tops.forEach((tops, index) => {
-            console.log(`${index} - ${tops.prod.nome} com ${tops.qtd} unidades vendidas`)
+            console.log(`${index + 1} - ${tops.prod.nome} com ${tops.qtd} unidades vendidas`)
         });
         console.log(`--------------------------------`)
     }

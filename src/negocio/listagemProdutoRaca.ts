@@ -3,7 +3,7 @@ import Pet from "../modelo/pet";
 import Produto from "../modelo/produto";
 import Listagem from "./listagem";
 
-export default class ListagemProdutoTipo extends Listagem {
+export default class ListagemProdutoRaca extends Listagem {
     private pets: Pet[]
     private entrada: Entrada
 
@@ -13,10 +13,10 @@ export default class ListagemProdutoTipo extends Listagem {
         this.entrada = new Entrada()
     }
 
-    private filtraTipo(pets: Pet[], tipo: string): Pet[] {
+    private filtraRaca(pets: Pet[], raca: string): Pet[] {
         const listaFiltrada: Pet[] = []
         pets.forEach(pet => {
-            if(tipo === pet.getTipo){
+            if(raca === pet.getRaca){
                 listaFiltrada.push(pet)
             }
         })
@@ -24,10 +24,10 @@ export default class ListagemProdutoTipo extends Listagem {
     }
 
     listar() : void {
-        let tipo = this.entrada.receberTexto(`Digite o tipo de pet que deseja filtrar: `)
-        console.log(`\nProdutos mais consumidos por pets do tipo ${tipo}:`)
-        const lista = this.filtraTipo(this.pets, tipo)
-        let listaRetorno: {tipo: string, data: {produto: Produto, qtd: number}[]} = {tipo: tipo, data: []}
+        let raca = this.entrada.receberTexto(`Digite a raça de pet que deseja filtrar: `)
+        console.log(`\nProdutos mais consumidos por pets da raça ${raca}:`)
+        const lista = this.filtraRaca(this.pets, raca)
+        let listaRetorno: {raca: string, data: {produto: Produto, qtd: number}[]} = {raca: raca, data: []}
         const produtos: string[] = []
         lista.forEach(pet => {
             pet.getProdutosConsumidos.forEach(produto => {

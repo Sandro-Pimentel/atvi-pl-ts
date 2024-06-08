@@ -11,20 +11,17 @@ export default class ListagemClientesVal extends Listagem {
         this.top10 = [];
     }
 
-    private contaValor(cliente: Cliente) {
+    private ordenaValConsumido(a: Cliente, b: Cliente) {
         let prod = 0
         let serv = 0
-        const total = [prod, serv]
-        cliente.getProdutosConsumidos.forEach(produto => prod+=produto.preco)
-        cliente.getServicosConsumidos.forEach(servico => serv+=servico.preco)
-        return total
-    }
-
-    private ordenaValConsumido(a: Cliente, b: Cliente) {
-        const bleros = this.contaValor(a)
-        const bleros2 = this.contaValor(b)
-        let tudoA = bleros[0] + bleros[1]
-        let tudoB = bleros2[0] + bleros2[1]
+        a.getProdutosConsumidos.forEach(produto => prod+=produto.preco)
+        a.getServicosConsumidos.forEach(servico => serv+=servico.preco)
+        let tudoA = prod + serv
+        prod = 0
+        serv = 0
+        b.getProdutosConsumidos.forEach(produto => prod+=produto.preco)
+        b.getServicosConsumidos.forEach(servico => serv+=servico.preco)
+        let tudoB = prod + serv
         
         if(tudoA > tudoB) {
             return -1
@@ -39,8 +36,14 @@ export default class ListagemClientesVal extends Listagem {
         this.top10 = this.clientes
         this.top10.sort(this.ordenaValConsumido)
         console.log(`\nTop 10 clientes que mais consumiram:`);
-        for(let index = 0; index < 10; index++) {
-            console.log(`${index+1} - ${this.top10[index].nome} - ${this.top10[index].getProdutosConsumidos.length + this.top10[index].getServicosConsumidos.length} Produtos/Serviços consumidos`  )
+        if(this.top10.length >= 10){
+            for(let index = 0; index < 10; index++) {
+                console.log(`${index+1} - ${this.top10[index].nome} - ${this.top10[index].getProdutosConsumidos.length + this.top10[index].getServicosConsumidos.length} Produtos/Serviços consumidos`  )
+            }
+        } else {
+            for(let index = 0; index < this.top10.length; index++){
+                console.log(`${index+1} - ${this.top10[index].nome} - ${this.top10[index].getProdutosConsumidos.length + this.top10[index].getServicosConsumidos.length} Produtos/Serviços consumidos`  )
+            }
         }
         console.log(`---------------------------------------------------------`)
     }

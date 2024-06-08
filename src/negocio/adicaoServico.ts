@@ -9,12 +9,14 @@ import ListagemServicos from "./listagemServicos";
 export default class AdicaoServico extends Adicao {
     private servicos: Servico[]
     private clientes: Cliente[]
+    private pets: Pet[]
     private entrada: Entrada
 
-    constructor(servicos: Servico[], clientes: Cliente[]) {
+    constructor(servicos: Servico[], clientes: Cliente[], pets: Pet[]) {
         super()
         this.servicos = servicos
         this.clientes = clientes
+        this.pets = pets
         this.entrada = new Entrada()
     }
 
@@ -24,12 +26,12 @@ export default class AdicaoServico extends Adicao {
         listagem.listar()
         let continuar = true
         let cpf: string
-        let user: Cliente = new Cliente('', '', new CPF('', new Date()))
+        let indexUser: number = 0
         while(continuar){
             cpf = this.entrada.receberTexto(`Escolha o cpf do cliente que deseja comprar: `)
-            this.clientes.forEach(cliente => {
+            this.clientes.forEach((cliente, index) => {
                 if(cliente.getCpf.getValor === cpf){
-                    user = cliente
+                    indexUser = index
                     continuar = false
                 }
             })
@@ -37,36 +39,38 @@ export default class AdicaoServico extends Adicao {
 
         continuar = true
         let nome: string
-        let bixin: Pet
+        let indexListaPet: number
+        let indexPet: number
         while(continuar){
             nome = this.entrada.receberTexto(`Escolha o nome do pet que obterá o serviço: `)
-            user.getPets.forEach(pet => {
-                if(pet.getNome === nome){
-                    bixin = pet
+            nome.toLowerCase()
+            this.pets.forEach((pet, index) => {
+                if(pet.getNome.toLowerCase() === nome){
+                    indexPet = index
+                }
+            })
+
+            this.clientes[indexUser].getPets.forEach((pet, index) => {
+                if(pet.getNome.toLowerCase() === nome){
+                    indexListaPet = index
                     continuar = false
                 }
             })
         }
 
         let achou = false
-        continuar = true
-        while (continuar) {
-            while(!achou){
-            const escolhaItem = this.entrada.receberTexto(`Escolha o código do serviço que deseja adicionar: `)
-                this.servicos.forEach(servico => {
-                    if(servico.codigo === escolhaItem) {
-                        this.servicos.push(servico)
-                        user.addProd(servico)
-                        achou = true
-                    }
-                })
-                if(!achou){
-                    console.log(`Produto não encontrado! Insira um código válido.`)
+        while(!achou){
+        const escolhaItem = this.entrada.receberTexto(`Escolha o código do serviço que deseja adicionar: `)
+            this.servicos.forEach(servico => {
+                if(servico.codigo === escolhaItem) {
+                    this.clientes[indexUser].addServ(servico)
+                    this.clientes[indexUser].getPets[indexListaPet].getServicosConsumidos.push(servico)
+                    this.pets[indexPet].setServicosConsumidos = this.clientes[indexUser].getPets[indexListaPet].getServicosConsumidos
+                    achou = true
                 }
-            }
-            const continuaEntrada = this.entrada.receberTexto(`Deseja continuar comprando? (S/N)`)
-            if(continuaEntrada === `N`) {
-                continuar = false
+            })
+            if(!achou){
+                console.log(`Produto não encontrado! Insira um código válido.`)
             }
         }
         
