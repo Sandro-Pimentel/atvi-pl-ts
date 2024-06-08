@@ -31,20 +31,4 @@ export default class Empresa{
     public get getPets(){
         return this.pets
     }
-
-    public set setClientes(clientes: Cliente[]){
-        this.clientes = clientes
-    }
-
-    public set setProdutos(produtos: Produto[]){
-        this.produtos = produtos
-    }
-
-    public set setServicos(servicos: Servico[]){
-        this.servicos = servicos
-    }
-
-    public set setPets(pets: Pet[]){
-        this.pets = pets
-    }
 }

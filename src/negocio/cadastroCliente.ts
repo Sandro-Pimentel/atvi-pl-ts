@@ -23,7 +23,7 @@ export default class CadastroCliente extends Cadastro {
         let dataC = this.entrada.receberTexto(`Por favor informe a data de emissão do cpf, no padrão dd/mm/yyyy: `);
         let valorR = this.entrada.receberTexto(`Por favor informe o número do rg: `);
         let dataR = this.entrada.receberTexto(`Por favor informe a data de emissão do rg, no padrão dd/mm/yyyy: `);
-        let telefone = this.entrada.receberTexto(`Por favor informe o número de telefone no padrão 12987654321: `)
+        let telefone = this.entrada.receberTexto(`Por favor informe o número de telefone no padrão 12987654321: `);
         let partesDataC = dataC.split('/')
         let partesDataR = dataR.split('/')
         let anoC = new Number(partesDataC[2].valueOf()).valueOf()

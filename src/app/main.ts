@@ -35,13 +35,6 @@ import RemocaoServico from "../negocio/remocaoServico";
 
 console.log(`Bem-vindo ao melhor sistema de gerenciamento de pet shops e clínicas veterinarias`);
 let empresa = new Empresa();
-let cliente = new Cliente('Sandro', 'Sandro', new CPF('1', new Date()))
-empresa.setClientes = [cliente, new Cliente('João', 'João', new CPF('2', new Date()))]
-empresa.setServicos = [new Servico('1', 'Banho', 120), new Servico('2', 'Tosa', 100)]
-empresa.setProdutos = [new Produto('1', 'Ração 50kg', 150), new Produto('2', 'Ração 20kg', 80)]
-empresa.setPets = [new Pet('Rex', 'Pincher', 'Feminino', 'Cachorro', cliente.getCpf), new Pet('Nick', 'Pincher', 'Masculino', 'Cachorro', cliente.getCpf)]
-cliente.addPet(new Pet('Rex', 'Pincher', 'Feminino', 'Cachorro', cliente.getCpf))
-cliente.addPet(new Pet('Nick', 'Pincher', 'Masculino', 'Cachorro', cliente.getCpf))
 let execucao = true;
 let entrada = new Entrada();
 const opcoesAdm = `
