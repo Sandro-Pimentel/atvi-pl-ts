@@ -67,7 +67,6 @@ Opções:
 6 - Serviços mais consumidos(tipo de pet)
 7 - Produtos mais consumidos(raça de pet)
 8 - Serviços mais consumidos(raça de pet)
-
 `
 
 while (execucao) {
