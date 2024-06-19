@@ -5,6 +5,8 @@
 
 `npm install`: Instalar as dependências do projeto
 
+`npm install -g typescript`: Instala uma dependência do projeto
+
 `tsc`: Converter os arquivos Typescript para JavaScript
 
 `node ./out/app/index.js`: Rodar o projeto
