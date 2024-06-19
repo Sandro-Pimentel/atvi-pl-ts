@@ -7,4 +7,4 @@
 
 `tsc`: Converter os arquivos Typescript para JavaScript
 
-`node ./out/index.js`: Rodar o projeto
+`node ./out/app/index.js`: Rodar o projeto
